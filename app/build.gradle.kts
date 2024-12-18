@@ -58,8 +58,11 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.kotlinx.coroutine.android)
+    implementation(libs.kotlinx.coroutine.core)
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutine.test)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.espresso.core)
