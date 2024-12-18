@@ -12,6 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +31,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private suspend fun createCoroutines(amount: Int) {
+        val jobs = ArrayList<Job>()
+
+        for (i in 1..amount) {
+            jobs += GlobalScope.launch { delay(1_000) }
+        }
+
+        jobs.forEach { it.join() }
     }
 }
 
