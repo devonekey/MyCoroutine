@@ -15,12 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
+    lateinit var user: UserInfo
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -42,6 +45,11 @@ class MainActivity : ComponentActivity() {
 
             Log.d(TAG, "${Thread.activeCount()} threads active at the end")
             Log.d(TAG, "Took $time ms")
+
+            asyncGetUserInfo(1)
+            delay(1_000)
+
+            Log.d(TAG, "User ${user.id} is ${user.name}")
         }
     }
 
@@ -60,6 +68,14 @@ class MainActivity : ComponentActivity() {
 
         jobs.forEach { it.join() }
     }
+
+    private fun asyncGetUserInfo(id: Int) = GlobalScope.async {
+        delay(1_100)
+
+        user = UserInfo(id = id, name = "Susan", lastName = "Calvin")
+    }
+
+    data class UserInfo(val name: String, val lastName: String, val id: Int)
 
     companion object {
         private val TAG: String = MainActivity::class.java.simpleName
