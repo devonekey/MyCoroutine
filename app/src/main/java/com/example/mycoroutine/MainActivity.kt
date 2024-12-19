@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
                 jobA.join()
             }
 
-            jobA.join()
+//            jobA.join()
 
             Log.d(TAG, "Finished")
         }
