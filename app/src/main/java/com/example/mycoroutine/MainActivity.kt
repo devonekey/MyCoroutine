@@ -49,7 +49,13 @@ class MainActivity : ComponentActivity() {
         val jobs = ArrayList<Job>()
 
         for (i in 1..amount) {
-            jobs += GlobalScope.launch { delay(1_000) }
+            jobs += GlobalScope.launch {
+                Log.d(TAG, "Started $i in ${Thread.currentThread().name}")
+
+                delay(1_000)
+
+                Log.d(TAG, "Finished $i in ${Thread.currentThread().name}")
+            }
         }
 
         jobs.forEach { it.join() }
