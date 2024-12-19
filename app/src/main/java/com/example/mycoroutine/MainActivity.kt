@@ -1,6 +1,7 @@
 package com.example.mycoroutine
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -16,6 +17,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +34,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
+        runBlocking {
+            val time = measureTimeMillis { createCoroutines(10_000) }
+
+            Log.d(TAG, "Took $time ms")
+        }
     }
 
     private suspend fun createCoroutines(amount: Int) {
@@ -41,6 +50,10 @@ class MainActivity : ComponentActivity() {
         }
 
         jobs.forEach { it.join() }
+    }
+
+    companion object {
+        private val TAG: String = MainActivity::class.java.simpleName
     }
 }
 
