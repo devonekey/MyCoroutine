@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun asyncGetUserInfo(id: Int) = GlobalScope.async {
-        delay(1_100)
+//        delay(1_100)
 
         user = UserInfo(id = id, name = "Susan", lastName = "Calvin")
     }
