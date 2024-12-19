@@ -36,8 +36,11 @@ class MainActivity : ComponentActivity() {
         }
 
         runBlocking {
+            Log.d(TAG, "${Thread.activeCount()} thread active at the start")
+
             val time = measureTimeMillis { createCoroutines(10_000) }
 
+            Log.d(TAG, "${Thread.activeCount()} threads active at the end")
             Log.d(TAG, "Took $time ms")
         }
     }
