@@ -24,6 +24,8 @@ import kotlin.system.measureTimeMillis
 class MainActivity : ComponentActivity() {
     lateinit var user: UserInfo
     var counter = 0
+    lateinit var jobA: Job
+    lateinit var jobB: Job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,19 @@ class MainActivity : ComponentActivity() {
             workerB.await()
 
             Log.d(TAG, "counter: $counter")
+
+            jobA = GlobalScope.launch {
+                delay(1_000)
+
+                jobB.join()
+            }
+            jobB = GlobalScope.launch {
+                jobA.join()
+            }
+
+            jobA.join()
+
+            Log.d(TAG, "Finished")
         }
     }
 
