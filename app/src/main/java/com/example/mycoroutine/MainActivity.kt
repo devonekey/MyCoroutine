@@ -23,6 +23,7 @@ import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
     lateinit var user: UserInfo
+    var counter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,14 @@ class MainActivity : ComponentActivity() {
             delay(1_000)
 
             Log.d(TAG, "User ${user.id} is ${user.name}")
+
+            val workerA = asyncIncrement(2_000)
+            val workerB = asyncIncrement(100)
+
+            workerA.await()
+            workerB.await()
+
+            Log.d(TAG, "counter: $counter")
         }
     }
 
@@ -73,6 +82,12 @@ class MainActivity : ComponentActivity() {
 //        delay(1_100)
 
         user = UserInfo(id = id, name = "Susan", lastName = "Calvin")
+    }
+
+    private fun asyncIncrement(by: Int) = GlobalScope.async {
+        for (i in 0 until by) {
+            counter++
+        }
     }
 
     data class UserInfo(val name: String, val lastName: String, val id: Int)
