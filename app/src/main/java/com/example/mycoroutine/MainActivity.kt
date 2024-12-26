@@ -6,8 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.GlobalScope
@@ -38,6 +40,13 @@ class MainActivity : ComponentActivity() {
             MyCoroutineTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
+
+                    NavHost(
+                        navController = navController,
+                        startDestination = Init,
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                    }
                 }
             }
         }
