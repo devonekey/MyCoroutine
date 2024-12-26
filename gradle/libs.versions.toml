@@ -7,7 +7,7 @@ coroutineVersion = "1.7.3"
 espressoCore = "3.6.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
-kotlin = "1.9.0"
+kotlin = "2.0.21"
 lifecycleRuntimeKtx = "2.8.7"
 
 [libraries]
@@ -31,4 +31,5 @@ kotlinx-coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
