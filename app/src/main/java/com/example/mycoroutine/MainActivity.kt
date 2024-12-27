@@ -9,10 +9,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.mycoroutine.ui.component.ChapterParam
+import com.example.mycoroutine.ui.screen.ChaptersScreen
+import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -39,6 +44,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val coroutineScope = rememberCoroutineScope()
+
             MyCoroutineTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val navController = rememberNavController()
@@ -48,6 +55,23 @@ class MainActivity : ComponentActivity() {
                         startDestination = Init,
                         modifier = Modifier.padding(innerPadding)
                     ) {
+                        composable<Init> {
+                            ChaptersScreen(params = getChapters()) { index ->
+                                navController.navigate(Chapter(index))
+                            }
+                        }
+                        composable<Chapter> { backStackEntry ->
+                            val chapterIndex = backStackEntry.toRoute<Chapter>().index
+
+                            SectionsScreen(params = getSections(chapterIndex)) { sectionIndex ->
+                                navController.navigate(Section(chapterIndex, sectionIndex))
+                                coroutineScope.launch {
+                                    when {
+                                    }
+                                }
+                            }
+                        }
+                        composable<Section> { backStackEntry -> backStackEntry.toRoute<Section>() }
                     }
                 }
             }
