@@ -16,6 +16,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.Serializable
 import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
@@ -23,6 +24,12 @@ class MainActivity : ComponentActivity() {
     var counter = 0
     lateinit var jobA: Job
     lateinit var jobB: Job
+    @Serializable
+    object Init
+    @Serializable
+    data class Chapter(val index: Int)
+    @Serializable
+    data class Section(val chapterIndex: Int, val sectionIndex: Int)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
