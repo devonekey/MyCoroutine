@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -112,6 +113,18 @@ class MainActivity : ComponentActivity() {
     private fun asyncIncrement(by: Int) = GlobalScope.async {
         for (i in 0 until by) {
             counter++
+        }
+    }
+
+    private fun getChapters(): List<ChapterParam> {
+        val titles = resources.getStringArray(R.array.chapter_titles)
+        val descriptions = resources.getStringArray(R.array.chapter_descriptions)
+
+        return titles.mapIndexed { index, s ->
+            ChapterParam(
+                title = s,
+                description = descriptions[index]
+            )
         }
     }
 
