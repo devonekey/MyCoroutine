@@ -1,5 +1,6 @@
 package com.example.mycoroutine
 
+import SectionParam
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -122,6 +123,20 @@ class MainActivity : ComponentActivity() {
 
         return titles.mapIndexed { index, s ->
             ChapterParam(
+                title = s,
+                description = descriptions[index]
+            )
+        }
+    }
+
+    private fun getSections(chapter: Int): List<SectionParam> {
+        val (titles, descriptions) = when (chapter) {
+            else -> resources.getStringArray(R.array.chapter1_section_titles) to
+                    resources.getStringArray(R.array.chapter1_section_descriptions)
+        }
+
+        return titles.mapIndexed { index, s ->
+            SectionParam(
                 title = s,
                 description = descriptions[index]
             )
