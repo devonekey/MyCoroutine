@@ -17,20 +17,19 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.domain.logic.logic_1_2
+import com.example.mycoroutine.domain.logic.logic_1_3
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
-    var counter = 0
     lateinit var jobA: Job
     lateinit var jobB: Job
     @Serializable
@@ -69,6 +68,7 @@ class MainActivity : ComponentActivity() {
                                     when {
                                         chapterIndex == 0 && sectionIndex == 0 -> logic_1_1()
                                         chapterIndex == 0 && sectionIndex == 1 -> logic_1_2()
+                                        chapterIndex == 0 && sectionIndex == 2 -> logic_1_3()
                                     }
                                 }
                             }
@@ -80,14 +80,6 @@ class MainActivity : ComponentActivity() {
         }
 
         runBlocking {
-            val workerA = asyncIncrement(2_000)
-            val workerB = asyncIncrement(100)
-
-            workerA.await()
-            workerB.await()
-
-            Log.d(TAG, "counter: $counter")
-
             jobA = GlobalScope.launch {
                 delay(1_000)
 
@@ -100,12 +92,6 @@ class MainActivity : ComponentActivity() {
 //            jobA.join()
 
             Log.d(TAG, "Finished")
-        }
-    }
-
-    private fun asyncIncrement(by: Int) = GlobalScope.async {
-        for (i in 0 until by) {
-            counter++
         }
     }
 
