@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.mycoroutine.domain.logic.logic_1_1
+import com.example.mycoroutine.domain.logic.logic_1_2
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
@@ -29,7 +30,6 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
-    lateinit var user: UserInfo
     var counter = 0
     lateinit var jobA: Job
     lateinit var jobB: Job
@@ -68,6 +68,7 @@ class MainActivity : ComponentActivity() {
                                 coroutineScope.launch {
                                     when {
                                         chapterIndex == 0 && sectionIndex == 0 -> logic_1_1()
+                                        chapterIndex == 0 && sectionIndex == 1 -> logic_1_2()
                                     }
                                 }
                             }
@@ -79,11 +80,6 @@ class MainActivity : ComponentActivity() {
         }
 
         runBlocking {
-            asyncGetUserInfo(1)
-            delay(1_000)
-
-            Log.d(TAG, "User ${user.id} is ${user.name}")
-
             val workerA = asyncIncrement(2_000)
             val workerB = asyncIncrement(100)
 
@@ -105,12 +101,6 @@ class MainActivity : ComponentActivity() {
 
             Log.d(TAG, "Finished")
         }
-    }
-
-    private fun asyncGetUserInfo(id: Int) = GlobalScope.async {
-//        delay(1_100)
-
-        user = UserInfo(id = id, name = "Susan", lastName = "Calvin")
     }
 
     private fun asyncIncrement(by: Int) = GlobalScope.async {
@@ -144,8 +134,6 @@ class MainActivity : ComponentActivity() {
             )
         }
     }
-
-    data class UserInfo(val name: String, val lastName: String, val id: Int)
 
     companion object {
         private val TAG: String = MainActivity::class.java.simpleName
