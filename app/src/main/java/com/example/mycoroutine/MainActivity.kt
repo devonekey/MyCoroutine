@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
@@ -26,7 +27,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import kotlin.system.measureTimeMillis
 
 class MainActivity : ComponentActivity() {
     lateinit var user: UserInfo
@@ -67,6 +67,7 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(Section(chapterIndex, sectionIndex))
                                 coroutineScope.launch {
                                     when {
+                                        chapterIndex == 0 && sectionIndex == 0 -> logic_1_1()
                                     }
                                 }
                             }
@@ -78,13 +79,6 @@ class MainActivity : ComponentActivity() {
         }
 
         runBlocking {
-            Log.d(TAG, "${Thread.activeCount()} thread active at the start")
-
-            val time = measureTimeMillis { createCoroutines(10_000) }
-
-            Log.d(TAG, "${Thread.activeCount()} threads active at the end")
-            Log.d(TAG, "Took $time ms")
-
             asyncGetUserInfo(1)
             delay(1_000)
 
@@ -111,22 +105,6 @@ class MainActivity : ComponentActivity() {
 
             Log.d(TAG, "Finished")
         }
-    }
-
-    private suspend fun createCoroutines(amount: Int) {
-        val jobs = ArrayList<Job>()
-
-        for (i in 1..amount) {
-            jobs += GlobalScope.launch {
-                Log.d(TAG, "Started $i in ${Thread.currentThread().name}")
-
-                delay(1_000)
-
-                Log.d(TAG, "Finished $i in ${Thread.currentThread().name}")
-            }
-        }
-
-        jobs.forEach { it.join() }
     }
 
     private fun asyncGetUserInfo(id: Int) = GlobalScope.async {
