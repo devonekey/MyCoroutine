@@ -2,7 +2,6 @@ package com.example.mycoroutine
 
 import SectionParam
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,20 +17,15 @@ import androidx.navigation.toRoute
 import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.domain.logic.logic_1_2
 import com.example.mycoroutine.domain.logic.logic_1_3
+import com.example.mycoroutine.domain.logic.logic_1_4
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
-    lateinit var jobA: Job
-    lateinit var jobB: Job
     @Serializable
     object Init
     @Serializable
@@ -69,6 +63,7 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 0 && sectionIndex == 0 -> logic_1_1()
                                         chapterIndex == 0 && sectionIndex == 1 -> logic_1_2()
                                         chapterIndex == 0 && sectionIndex == 2 -> logic_1_3()
+                                        chapterIndex == 0 && sectionIndex == 3 -> logic_1_4()
                                     }
                                 }
                             }
@@ -77,21 +72,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
-
-        runBlocking {
-            jobA = GlobalScope.launch {
-                delay(1_000)
-
-                jobB.join()
-            }
-            jobB = GlobalScope.launch {
-                jobA.join()
-            }
-
-//            jobA.join()
-
-            Log.d(TAG, "Finished")
         }
     }
 
@@ -119,9 +99,5 @@ class MainActivity : ComponentActivity() {
                 description = descriptions[index]
             )
         }
-    }
-
-    companion object {
-        private val TAG: String = MainActivity::class.java.simpleName
     }
 }
