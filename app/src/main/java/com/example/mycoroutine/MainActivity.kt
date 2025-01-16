@@ -61,11 +61,11 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(Section(chapterIndex, sectionIndex))
                                 coroutineScope.launch {
                                     when {
-                                        chapterIndex == 0 && sectionIndex == 0 -> logic_1_1()
-                                        chapterIndex == 0 && sectionIndex == 1 -> logic_1_2()
+                                        chapterIndex == 0 && sectionIndex == 0 -> logic_1_1(this)
+                                        chapterIndex == 0 && sectionIndex == 1 -> logic_1_2(this)
                                         chapterIndex == 0 && sectionIndex == 2 -> logic_1_3()
                                         chapterIndex == 0 && sectionIndex == 3 -> logic_1_4()
-                                        chapterIndex == 0 && sectionIndex == 4 -> logic_1_5()
+                                        chapterIndex == 0 && sectionIndex == 4 -> logic_1_5(this)
                                     }
                                 }
                             }
