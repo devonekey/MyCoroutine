@@ -21,11 +21,13 @@ import com.example.mycoroutine.domain.logic.logic_1_4
 import com.example.mycoroutine.domain.logic.logic_1_5
 import com.example.mycoroutine.domain.logic.logic_2_1
 import com.example.mycoroutine.domain.logic.logic_2_2
+import com.example.mycoroutine.domain.logic.logic_2_3
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 0 && sectionIndex == 4 -> logic_1_5(this)
                                         chapterIndex == 1 && sectionIndex == 0 -> logic_2_1()
                                         chapterIndex == 1 && sectionIndex == 1 -> logic_2_2()
+                                        chapterIndex == 1 && sectionIndex == 2 -> logic_2_3()
                                     }
                                 }
                             }

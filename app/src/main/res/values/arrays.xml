@@ -25,9 +25,11 @@
     <string-array name="chapter2_section_titles">
         <item>async</item>
         <item>launch</item>
+        <item>Dispatcher</item>
     </string-array>
     <string-array name="chapter2_section_descriptions">
         <item>결과 처리를 위한 코루틴</item>
         <item>결과를 반환하지 않는 코루틴</item>
+        <item>특정 디스패처 사용</item>
     </string-array>
 </resources>
