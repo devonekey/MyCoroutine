@@ -91,6 +91,8 @@ class MainActivity : ComponentActivity() {
 
     private fun getSections(chapter: Int): List<SectionParam> {
         val (titles, descriptions) = when (chapter) {
+            1 -> resources.getStringArray(R.array.chapter2_section_titles) to
+                    resources.getStringArray(R.array.chapter2_section_descriptions)
             else -> resources.getStringArray(R.array.chapter1_section_titles) to
                     resources.getStringArray(R.array.chapter1_section_descriptions)
         }
