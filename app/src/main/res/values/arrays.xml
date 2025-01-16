@@ -11,11 +11,13 @@
         <item>동시성이 어려운 이유: 레이스 컨디션</item>
         <item>동시성이 어려운 이유: 원자성 위반</item>
         <item>동시성이 어려운 이유: 교착 상태</item>
+        <item>명시적인 선언</item>
     </string-array>
     <string-array name="chapter1_section_descriptions">
         <item>코루틴들을 생성하는데 소요된 시간과 생성 전후의 스레드 위치</item>
         <item>경쟁 상태로 인해 발생할 수 있는 오류</item>
         <item>원자성을 위반함으로써 발생하는 상이한 결과</item>
         <item>교착 상태로 인해 오류가 발생할 수 있는 오류</item>
+        <item>중단 가능한 연산이 실행돼야 하는 시점 지정</item>
     </string-array>
 </resources>
