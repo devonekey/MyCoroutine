@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -24,6 +25,7 @@ import com.example.mycoroutine.domain.logic.logic_2_2
 import com.example.mycoroutine.domain.logic.logic_2_3
 import com.example.mycoroutine.domain.logic.logic_2_4
 import com.example.mycoroutine.ui.component.ChapterParam
+import com.example.mycoroutine.ui.screen.Chapter2Section4Screen
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
@@ -40,6 +42,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val count = mutableIntStateOf(0)
+
         enableEdgeToEdge()
         setContent {
             val coroutineScope = rememberCoroutineScope()
@@ -73,12 +78,18 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 1 && sectionIndex == 0 -> logic_2_1()
                                         chapterIndex == 1 && sectionIndex == 1 -> logic_2_2()
                                         chapterIndex == 1 && sectionIndex == 2 -> logic_2_3()
-                                        chapterIndex == 1 && sectionIndex == 3 -> logic_2_4()
+                                        chapterIndex == 1 && sectionIndex == 3 -> { count.intValue = logic_2_4().await() }
                                     }
                                 }
                             }
                         }
-                        composable<Section> { backStackEntry -> backStackEntry.toRoute<Section>() }
+                        composable<Section> { backStackEntry ->
+                            val (chapterIndex, sectionIndex) = backStackEntry.toRoute<Section>()
+
+                            when {
+                                chapterIndex == 1 && sectionIndex == 3 -> Chapter2Section4Screen(count)
+                            }
+                        }
                     }
                 }
             }

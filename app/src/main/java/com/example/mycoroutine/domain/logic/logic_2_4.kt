@@ -2,6 +2,7 @@ package com.example.mycoroutine.domain.logic
 
 import android.util.Log
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
@@ -14,10 +15,11 @@ private val dispatcher = newSingleThreadContext(name = "ServiceCall")
 private val factory = DocumentBuilderFactory.newInstance()
 
 fun logic_2_4() = runBlocking {
-    GlobalScope.launch(dispatcher) {
+    GlobalScope.async(dispatcher) {
         val headlines = fetchRssHeadlines()
 
         headlines.forEach { Log.d(TAG, it) }
+        headlines.count()
     }
 }
 
