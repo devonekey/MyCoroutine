@@ -3,10 +3,12 @@
     <string-array name="chapter_titles">
         <item>1장</item>
         <item>2장</item>
+        <item>3장</item>
     </string-array>
     <string-array name="chapter_descriptions">
         <item>Hello, Concurrent World!</item>
         <item>코루틴 인 액션</item>
+        <item>라이프 사이클과 에러 핸들링</item>
     </string-array>
     <string-array name="chapter1_section_titles">
         <item>스레드, 코루틴</item>
@@ -33,5 +35,9 @@
         <item>결과를 반환하지 않는 코루틴</item>
         <item>특정 디스패처 사용</item>
         <item>백그라운드 스레드에서 REST 호출</item>
+    </string-array>
+    <string-array name="chapter3_section_titles">
+    </string-array>
+    <string-array name="chapter3_section_descriptions">
     </string-array>
 </resources>
