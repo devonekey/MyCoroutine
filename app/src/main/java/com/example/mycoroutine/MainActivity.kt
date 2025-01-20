@@ -18,6 +18,7 @@ import androidx.navigation.toRoute
 import com.example.mycoroutine.domain.logic.chapter3.section1.main as logic_3_1
 import com.example.mycoroutine.domain.logic.chapter3.section2.main as logic_3_2
 import com.example.mycoroutine.domain.logic.chapter3.section3.main as logic_3_3
+import com.example.mycoroutine.domain.logic.chapter3.section4.main as logic_3_4
 import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.domain.logic.logic_1_2
 import com.example.mycoroutine.domain.logic.logic_1_3
@@ -85,6 +86,7 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 2 && sectionIndex == 0 -> logic_3_1()
                                         chapterIndex == 2 && sectionIndex == 1 -> logic_3_2()
                                         chapterIndex == 2 && sectionIndex == 2 -> logic_3_3()
+                                        chapterIndex == 2 && sectionIndex == 3 -> logic_3_4()
                                     }
                                 }
                             }
