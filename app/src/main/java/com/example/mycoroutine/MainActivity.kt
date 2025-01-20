@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.mycoroutine.domain.logic.chapter3.section1.main as logic_3_1
 import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.domain.logic.logic_1_2
 import com.example.mycoroutine.domain.logic.logic_1_3
@@ -79,6 +80,7 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 1 && sectionIndex == 1 -> logic_2_2()
                                         chapterIndex == 1 && sectionIndex == 2 -> logic_2_3()
                                         chapterIndex == 1 && sectionIndex == 3 -> { count.intValue = logic_2_4().await() }
+                                        chapterIndex == 2 && sectionIndex == 0 -> logic_3_1()
                                     }
                                 }
                             }
