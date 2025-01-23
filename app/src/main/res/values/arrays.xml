@@ -42,6 +42,7 @@
         <item>Job 취소</item>
         <item>Job 예외 처리</item>
         <item>Deferred 생성</item>
+        <item>Deferred 예외 처리</item>
     </string-array>
     <string-array name="chapter3_section_descriptions">
         <item>자동으로 시작되지 않는 생성 방법</item>
@@ -49,5 +50,6 @@
         <item>실행을 취소하고 취소에 대한 정보를 얻는 방법</item>
         <item>실행 도중에 예외가 발생했을 때 그에 대한 정보를 얻는 방법</item>
         <item></item>
+        <item>try-catch 블록을 이용한 Deferred 예외 처리</item>
     </string-array>
 </resources>

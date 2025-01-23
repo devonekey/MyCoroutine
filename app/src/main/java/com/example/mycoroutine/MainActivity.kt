@@ -20,6 +20,7 @@ import com.example.mycoroutine.domain.logic.chapter3.section2.main as logic_3_2
 import com.example.mycoroutine.domain.logic.chapter3.section3.main as logic_3_3
 import com.example.mycoroutine.domain.logic.chapter3.section4.main as logic_3_4
 import com.example.mycoroutine.domain.logic.chapter3.section5.main as logic_3_5
+import com.example.mycoroutine.domain.logic.chapter3.section6.main as logic_3_6
 import com.example.mycoroutine.domain.logic.logic_1_1
 import com.example.mycoroutine.domain.logic.logic_1_2
 import com.example.mycoroutine.domain.logic.logic_1_3
@@ -89,6 +90,7 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 2 && sectionIndex == 2 -> logic_3_3()
                                         chapterIndex == 2 && sectionIndex == 3 -> logic_3_4()
                                         chapterIndex == 2 && sectionIndex == 4 -> logic_3_5()
+                                        chapterIndex == 2 && sectionIndex == 5 -> logic_3_6()
                                     }
                                 }
                             }
