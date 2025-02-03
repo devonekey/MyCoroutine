@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.mycoroutine.domain.logic.chapter3.section8.logic_3_8
 import com.example.mycoroutine.domain.logic.chapter3.section1.main as logic_3_1
 import com.example.mycoroutine.domain.logic.chapter3.section2.main as logic_3_2
 import com.example.mycoroutine.domain.logic.chapter3.section3.main as logic_3_3
@@ -33,9 +35,11 @@ import com.example.mycoroutine.domain.logic.logic_2_3
 import com.example.mycoroutine.domain.logic.logic_2_4
 import com.example.mycoroutine.ui.component.ChapterParam
 import com.example.mycoroutine.ui.screen.Chapter2Section4Screen
+import com.example.mycoroutine.ui.screen.Chapter3Section8Screen
 import com.example.mycoroutine.ui.screen.ChaptersScreen
 import com.example.mycoroutine.ui.screen.SectionsScreen
 import com.example.mycoroutine.ui.theme.MyCoroutineTheme
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
@@ -51,6 +55,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val count = mutableIntStateOf(0)
+        val feeds = mutableIntStateOf(0)
+        val headlines = mutableStateListOf<String>()
 
         enableEdgeToEdge()
         setContent {
@@ -93,6 +99,14 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 2 && sectionIndex == 4 -> logic_3_5()
                                         chapterIndex == 2 && sectionIndex == 5 -> logic_3_6()
                                         chapterIndex == 2 && sectionIndex == 6 -> logic_3_7()
+                                        chapterIndex == 2 && sectionIndex == 7 -> {
+                                            val requests = mutableListOf<Deferred<List<String>>>()
+
+                                            logic_3_8(requests).forEach { it.await() }
+                                            headlines.addAll(requests.flatMap { it.getCompleted() })
+
+                                            feeds.intValue = requests.count()
+                                        }
                                     }
                                 }
                             }
@@ -102,6 +116,10 @@ class MainActivity : ComponentActivity() {
 
                             when {
                                 chapterIndex == 1 && sectionIndex == 3 -> Chapter2Section4Screen(count)
+                                chapterIndex == 2 && sectionIndex == 7 -> Chapter3Section8Screen(
+                                    feeds = feeds,
+                                    headlines = headlines
+                                )
                             }
                         }
                     }
