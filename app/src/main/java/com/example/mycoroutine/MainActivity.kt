@@ -102,8 +102,12 @@ class MainActivity : ComponentActivity() {
                                         chapterIndex == 2 && sectionIndex == 7 -> {
                                             val requests = mutableListOf<Deferred<List<String>>>()
 
-                                            logic_3_8(requests).forEach { it.await() }
-                                            headlines.addAll(requests.flatMap { it.getCompleted() })
+                                            logic_3_8(requests).forEach { it.join() }
+                                            headlines.addAll(
+                                                requests
+                                                    .filter { !it.isCancelled }
+                                                    .flatMap { it.getCompleted() }
+                                            )
 
                                             feeds.intValue = requests.count()
                                         }

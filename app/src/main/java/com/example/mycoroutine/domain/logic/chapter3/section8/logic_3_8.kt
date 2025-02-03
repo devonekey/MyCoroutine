@@ -12,7 +12,8 @@ import javax.xml.parsers.DocumentBuilderFactory
 private val feeds = listOf(
     "https://www.npr.org/rss/rss.php?id=1001",
     "http://rss.cnn.com/rss/cnn_topstories.rss",
-//    "http://feeds.foxnews.com/foxnews/politics?format=xml"
+    "http://feeds.foxnews.com/foxnews/politics?format=xml",
+    "htt:myNewsFeed"
 )
 private val dispatcher = newFixedThreadPoolContext(2, "IO")
 private val factory = DocumentBuilderFactory.newInstance()
