@@ -15,10 +15,13 @@ import androidx.constraintlayout.compose.Dimension
 @Composable
 fun Chapter3Section8Screen(
     feeds: State<Int>,
-    headlines: SnapshotStateList<String>
+    headlines: SnapshotStateList<String>,
+    failed: State<Int>
 ) {
+    val count = feeds.value - failed.value
+
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
-        val (progressBar, newsCount) = createRefs()
+        val (progressBar, newsCount, failedCount) = createRefs()
 
         CircularProgressIndicator(
             modifier = Modifier.constrainAs(progressBar) {
@@ -33,7 +36,7 @@ fun Chapter3Section8Screen(
             color = Color.Black
         )
         Text(
-            text = "Found ${headlines.size} News in ${feeds.value} feeds",
+            text = "Found ${headlines.size} News in $count feeds",
             modifier = Modifier.constrainAs(newsCount) {
                 width = Dimension.wrapContent
                 height = Dimension.wrapContent
@@ -43,5 +46,19 @@ fun Chapter3Section8Screen(
                 end.linkTo(anchor = parent.end)
             }
         )
+
+        if (failed.value > 0) {
+            Text(
+                text = "Failed to fetch ${failed.value} feeds",
+                modifier = Modifier.constrainAs(failedCount) {
+                    width = Dimension.wrapContent
+                    height = Dimension.wrapContent
+
+                    start.linkTo(anchor = parent.start)
+                    top.linkTo(anchor = newsCount.bottom, margin = 20.dp)
+                    end.linkTo(anchor = parent.end)
+                }
+            )
+        }
     }
 }

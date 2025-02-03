@@ -57,6 +57,7 @@ class MainActivity : ComponentActivity() {
         val count = mutableIntStateOf(0)
         val feeds = mutableIntStateOf(0)
         val headlines = mutableStateListOf<String>()
+        var failed = mutableIntStateOf(0)
 
         enableEdgeToEdge()
         setContent {
@@ -110,6 +111,10 @@ class MainActivity : ComponentActivity() {
                                             )
 
                                             feeds.intValue = requests.count()
+                                            failed.intValue =
+                                                requests
+                                                    .filter { it.isCancelled }
+                                                    .size
                                         }
                                     }
                                 }
@@ -122,7 +127,8 @@ class MainActivity : ComponentActivity() {
                                 chapterIndex == 1 && sectionIndex == 3 -> Chapter2Section4Screen(count)
                                 chapterIndex == 2 && sectionIndex == 7 -> Chapter3Section8Screen(
                                     feeds = feeds,
-                                    headlines = headlines
+                                    headlines = headlines,
+                                    failed = failed
                                 )
                             }
                         }
