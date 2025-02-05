@@ -156,6 +156,8 @@ class MainActivity : ComponentActivity() {
                     resources.getStringArray(R.array.chapter2_section_descriptions)
             2 -> resources.getStringArray(R.array.chapter3_section_titles) to
                     resources.getStringArray(R.array.chapter3_section_descriptions)
+            3 -> resources.getStringArray(R.array.chapter4_section_titles) to
+                    resources.getStringArray(R.array.chapter4_section_descriptions)
             else -> resources.getStringArray(R.array.chapter1_section_titles) to
                     resources.getStringArray(R.array.chapter1_section_descriptions)
         }
