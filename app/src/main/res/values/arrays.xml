@@ -4,11 +4,13 @@
         <item>1장</item>
         <item>2장</item>
         <item>3장</item>
+        <item>4장</item>
     </string-array>
     <string-array name="chapter_descriptions">
         <item>Hello, Concurrent World!</item>
         <item>코루틴 인 액션</item>
         <item>라이프 사이클과 에러 핸들링</item>
+        <item>일시 중단 함수와 코루틴 컨텍스트</item>
     </string-array>
     <string-array name="chapter1_section_titles">
         <item>스레드, 코루틴</item>
@@ -55,5 +57,9 @@
         <item>try-catch 블록을 이용한 Deferred 예외 처리</item>
         <item>상태는 한 방향으로만 이동</item>
         <item></item>
+    </string-array>
+    <string-array name="chapter4_section_titles">
+    </string-array>
+    <string-array name="chapter4_section_descriptions">
     </string-array>
 </resources>
